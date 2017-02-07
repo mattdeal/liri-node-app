@@ -1,22 +1,23 @@
-//todo: get command
-//todo: inside get command, if args are passed, handle args
+handleCommand(process.argv[2], process.argv[3]);
 
-var command = process.argv[2];
-switch (command) {
-	case 'my-tweets':
-		displayTweets();
-		break;
-	case 'spotify-this-song':
-		displaySpotify(process.argv[3]);
-		break;
-	case 'movie-this':
-		displayMovie(process.argv[3]);
-		break;
-	case 'do-whatit-says':
-		break;
-	default:
-		console.log('wut?');
-		break;
+function handleCommand(command, detail) {
+	switch (command) {
+		case 'my-tweets':
+			displayTweets();
+			break;
+		case 'spotify-this-song':
+			displaySpotify(detail);
+			break;
+		case 'movie-this':
+			displayMovie(detail);
+			break;
+		case 'do-what-it-says':
+			displayTextCommand();
+			break;
+		default:
+			doLog('wut?');
+			break;
+	}
 }
 
 function displayTweets() {
@@ -38,10 +39,10 @@ function displayTweets() {
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
 	  if (!error) {
 	    for (var i = 0; i < tweets.length && i < 20; i++) {
-	    	console.log(tweets[i].created_at + ' ' + tweets[i].text);
+	    	doLog(tweets[i].created_at + ' ' + tweets[i].text);
 	    }
 	  } else {
-	  	console.log(error);
+	  	doLog(error);
 	  }
 	});
 }
@@ -56,7 +57,7 @@ function displaySpotify(trackName) {
 
 		spotify.lookup(options, function(err, data) {
 			if (err) {
-				console.log('Error occurred: ' + err);
+				doLog('Error occurred: ' + err);
 		        return;
 			}
 
@@ -65,10 +66,10 @@ function displaySpotify(trackName) {
 	    		artistList.push(data.artists[i].name);
 	    	}
 
-			console.log('Artist(s): ' + artistList);
-		    console.log('Name: ' + data.name);
-		    console.log('Preview: ' + data.preview_url);
-		    console.log('Album: ' + data.album.name);
+			doLog('Artist(s): ' + artistList);
+		    doLog('Name: ' + data.name);
+		    doLog('Preview: ' + data.preview_url);
+		    doLog('Album: ' + data.album.name);
 		});
 	} else {
 		options.type = 'track';
@@ -76,11 +77,11 @@ function displaySpotify(trackName) {
 
 		spotify.search(options, function(err, data) {
 		    if ( err ) {
-		        console.log('Error occurred: ' + err);
+		        doLog('Error occurred: ' + err);
 		        return;
 		    }
 		 
-		    // console.log(data.tracks);
+		    // doLog(data.tracks);
 
 		    if (data.tracks.items.length > 0) {
 		    	var track = data.tracks.items[0];
@@ -90,12 +91,12 @@ function displaySpotify(trackName) {
 		    		artistList.push(track.artists[i].name);
 		    	}
 
-			    console.log('Artist(s): ' + artistList.join(', '));
-			    console.log('Name: ' + track.name);
-			    console.log('Preview: ' + track.preview_url);
-			    console.log('Album: ' + track.album.name);
+			    doLog('Artist(s): ' + artistList.join(', '));
+			    doLog('Name: ' + track.name);
+			    doLog('Preview: ' + track.preview_url);
+			    doLog('Album: ' + track.album.name);
 		    } else {
-		    	console.log('no results...');
+		    	doLog('no results...');
 		    }	    
 		});
 	}	
@@ -116,17 +117,31 @@ function displayMovie(movieName) {
 		if (!error && response.statusCode == 200) {
 	    	var movie = JSON.parse(data);
 
-	    	console.log('Title: ' + movie.Title);
-	    	console.log('Year: ' + movie.Year);
-	    	console.log('IMBD Rating: ' + movie.imdbRating);
-	    	console.log('Country: ' + movie.Country);
-	    	console.log('Language: ' + movie.Language);
-	    	console.log('Plot: ' + movie.Plot);
-	    	console.log('Actors: ' + movie.Actors);
-	    	console.log('Rotten Tomatoes Rating: ' + movie.tomatoRating);
-	    	console.log('Rotten Tomatoes URL: ' + movie.tomatoURL);
+	    	doLog('Title: ' + movie.Title);
+	    	doLog('Year: ' + movie.Year);
+	    	doLog('IMBD Rating: ' + movie.imdbRating);
+	    	doLog('Country: ' + movie.Country);
+	    	doLog('Language: ' + movie.Language);
+	    	doLog('Plot: ' + movie.Plot);
+	    	doLog('Actors: ' + movie.Actors);
+	    	doLog('Rotten Tomatoes Rating: ' + movie.tomatoRating);
+	    	doLog('Rotten Tomatoes URL: ' + movie.tomatoURL);
 	  	} else {
-	  		console.log(error);
+	  		doLog(error);
 	  	}
 	});
+}
+
+function displayTextCommand() {
+	var fs = require("fs");
+
+	fs.readFile("random.txt", "utf8", function(error, data) {
+	  var dataArr = data.split(",");
+	  handleCommand(dataArr[0], dataArr[1]);
+	});
+}
+
+function doLog(text) {
+	//append to text file
+	console.log(text);
 }
