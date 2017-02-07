@@ -10,6 +10,7 @@ switch (command) {
 		displaySpotify(process.argv[3]);
 		break;
 	case 'movie-this':
+		displayMovie(process.argv[3]);
 		break;
 	case 'do-whatit-says':
 		break;
@@ -17,8 +18,6 @@ switch (command) {
 		console.log('wut?');
 		break;
 }
-
-// BEGIN TWITTER //
 
 function displayTweets() {
 	// load keys.js
@@ -38,7 +37,6 @@ function displayTweets() {
 	var params = {screen_name: 'EmDubDe'};
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
 	  if (!error) {
-	    // console.log(tweets);
 	    for (var i = 0; i < tweets.length && i < 20; i++) {
 	    	console.log(tweets[i].created_at + ' ' + tweets[i].text);
 	    }
@@ -101,4 +99,34 @@ function displaySpotify(trackName) {
 		    }	    
 		});
 	}	
+}
+
+function displayMovie(movieName) {
+	var request = require('request');
+	var url = '';
+	if (movieName === undefined) {
+		url = 'http://www.omdbapi.com/?i=tt0485947&plot=short&r=json&tomatoes=true';
+	} else {
+		url = 'http://www.omdbapi.com/?t=' + 
+			encodeURIComponent(movieName) + 
+			'&y=&plot=short&r=json&tomatoes=true';	
+	}
+
+	request(url, function (error, response, data) {
+		if (!error && response.statusCode == 200) {
+	    	var movie = JSON.parse(data);
+
+	    	console.log('Title: ' + movie.Title);
+	    	console.log('Year: ' + movie.Year);
+	    	console.log('IMBD Rating: ' + movie.imdbRating);
+	    	console.log('Country: ' + movie.Country);
+	    	console.log('Language: ' + movie.Language);
+	    	console.log('Plot: ' + movie.Plot);
+	    	console.log('Actors: ' + movie.Actors);
+	    	console.log('Rotten Tomatoes Rating: ' + movie.tomatoRating);
+	    	console.log('Rotten Tomatoes URL: ' + movie.tomatoURL);
+	  	} else {
+	  		console.log(error);
+	  	}
+	});
 }
