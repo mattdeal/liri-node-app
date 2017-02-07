@@ -142,6 +142,12 @@ function displayTextCommand() {
 }
 
 function doLog(text) {
-	//append to text file
+	var fs = require("fs");
+	fs.appendFile('log.txt', text + '\r\n', function(error) {
+		if (error) {
+			console.log(err);
+		}
+	});
+
 	console.log(text);
 }
