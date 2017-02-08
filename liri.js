@@ -15,7 +15,7 @@ function handleCommand(command, detail) {
 			displayTextCommand();
 			break;
 		default:
-			doLog('wut?');
+			doLog('Wut?  You did not enter a valid command.');
 			break;
 	}
 }
@@ -25,7 +25,7 @@ function displayTweets() {
 	var twitterConfig = require('./keys.js');
 	var twitterKeys = twitterConfig.twitterKeys;
 
-	// Twitter Config - move inside function
+	// Twitter Config
 	var Twitter = require('twitter');
 	var client = new Twitter({
 	  consumer_key: twitterKeys.consumer_key,
@@ -34,10 +34,11 @@ function displayTweets() {
 	  access_token_secret: twitterKeys.access_token_secret
 	});
 
-	// get tweets - clean up creation time
+	// get tweets
 	var params = {screen_name: 'EmDubDe'};
 	client.get('statuses/user_timeline', params, function(error, tweets, response) {
 	  if (!error) {
+  		// display tweets
 	    for (var i = 0; i < tweets.length && i < 20; i++) {
 	    	doLog(tweets[i].created_at + ' ' + tweets[i].text);
 	    }
@@ -50,9 +51,9 @@ function displayTweets() {
 function displaySpotify(trackName) {
 	var spotify = require('spotify');
 	var options = {};
+	options.type = 'track';
 
 	if (trackName === undefined) {
-		options.type = 'track';
 		options.id = '0hrBpAOgrt8RXigk83LLNE';
 
 		spotify.lookup(options, function(err, data) {
@@ -72,7 +73,6 @@ function displaySpotify(trackName) {
 		    doLog('Album: ' + data.album.name);
 		});
 	} else {
-		options.type = 'track';
 		options.query = trackName;
 
 		spotify.search(options, function(err, data) {
@@ -81,8 +81,6 @@ function displaySpotify(trackName) {
 		        return;
 		    }
 		 
-		    // doLog(data.tracks);
-
 		    if (data.tracks.items.length > 0) {
 		    	var track = data.tracks.items[0];
 		    	var artistList = [];
