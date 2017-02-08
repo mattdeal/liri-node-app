@@ -6,3 +6,36 @@ wut?
 Mon Feb 06 22:49:22 +0000 2017 Testing out an app
 Wed Feb 08 23:23:12 +0000 2017 Random stuff and things
 Mon Feb 06 22:49:22 +0000 2017 Testing out an app
+Wed Feb 08 23:23:12 +0000 2017 Random stuff and things
+Mon Feb 06 22:49:22 +0000 2017 Testing out an app
+Artist(s): Johnny Cash
+Name: I Walk the Line
+Preview: https://p.scdn.co/mp3-preview/540c0262ddb121816bb5a98c7d2cae9dcbe03be1?cid=null
+Album: I Walk the Line (Original Soundtrack Recording)
+Artist(s): Ace of Base
+Preview: https://p.scdn.co/mp3-preview/4c463359f67dd3546db7294d236dd0ae991882ff?cid=null
+Name: The Sign
+Album: The Sign (US Album) [Remastered]
+null
+Title: Mr. Nobody
+Year: 2009
+IMBD Rating: 7.9
+Country: Belgium, Germany, Canada, France
+Language: English, Mohawk
+Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
+Actors: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
+Rotten Tomatoes Rating: 6.6
+Rotten Tomatoes URL: http://www.rottentomatoes.com/m/mr-nobody/
+Title: The Matrix
+IMBD Rating: 8.7
+Year: 1999
+Country: USA
+Language: English
+Plot: A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.
+Actors: Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving
+Rotten Tomatoes Rating: 7.6
+Rotten Tomatoes URL: http://www.rottentomatoes.com/m/matrix/
+Artist(s): Backstreet Boys
+Name: I Want It That Way
+Preview: https://p.scdn.co/mp3-preview/e72a05dc3f69c891e3390c3ceaa77fad02f6b5f6?cid=null
+Album: The Hits--Chapter One
